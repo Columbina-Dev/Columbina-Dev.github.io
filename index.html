@@ -15,7 +15,7 @@
   <p id="countdown"></p>
 
   <script>
-    var countDownDate = new Date("2024-12-03T00:00:00+08:00").getTime();
+    var countDownDate = new Date("2024-12-06T00:00:00+08:00").getTime();
     var countdownFunction = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
@@ -26,10 +26,10 @@
                                (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       document.getElementById("countdown").innerHTML = 
-        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        "Launching Countdown:" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (distance < 0) {
         clearInterval(countdownFunction);
-        document.getElementById("countdown").innerHTML = "LAUNCHED";
+        document.getElementById("countdown").innerHTML = "Launching Countdown: ?d ?h ?m ?s";
       }
     }, 1000);
   </script>
