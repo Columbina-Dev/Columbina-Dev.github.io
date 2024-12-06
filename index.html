@@ -7,6 +7,7 @@
   <style>
     body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
     #countdown { font-size: 20px; margin-top: 30px; }
+    .copy-link { cursor: pointer; text-decoration: underline; color: blue; }
   </style>
 </head>
 <body>
@@ -15,9 +16,18 @@
   <p id="countdown"></p>
   <br>
   <p>Sorry for continuously extending, some subdomains are up, more are developing...</p>
-  <p><a href="https://mirror.columbina.dev" target="_blank">Mirror Station</a> | <a href="https://blog.columbina.dev" target="_blank">Blogs</a> | <a href="https://matrix.to/#/#cyrene:columbina.dev" target="_blank">Matrix</a> | <a href="https://misskey.columbina.dev" target="_blank">Misskey</a> | <a href="https://file.columbina.dev" target="_blank">FileCodeBox</a> | And more...</p>
+  <p>
+    <a href="https://mirror.columbina.dev" target="_blank">Mirror Station</a> |
+    <a href="https://blog.columbina.dev" target="_blank">Blogs</a> |
+    <a href="https://matrix.to/#/#cyrene:columbina.dev" target="_blank">Matrix</a> |
+    <a href="https://misskey.columbina.dev" target="_blank">Misskey</a> |
+    <a href="https://file.columbina.dev" target="_blank">FileCodeBox</a> | Minecraft Server: 
+    <span class="copy-link" onclick="copyText('mc.columbina.dev')">copy address</span>, 
+    <span class="copy-link" onclick="copyText('19132')">copy port</span>
+  </p>
   
   <script>
+    // Countdown
     var countDownDate = new Date("2025-01-29T00:00:00+08:00").getTime();
     var countdownFunction = setInterval(function() {
       var now = new Date().getTime();
@@ -35,6 +45,15 @@
         document.getElementById("countdown").innerHTML = "Launching Countdown: ?d ?h ?m ?s";
       }
     }, 1000);
+
+    // Copy
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(function() {
+        alert("Copied: " + text);
+      }).catch(function(error) {
+        alert("Failed to copy: " + error);
+      });
+    }
   </script>
 </body>
 </html>
