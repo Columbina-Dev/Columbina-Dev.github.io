@@ -15,7 +15,7 @@
   <p>Placeholder for homepage... for now.</p>
   <p id="countdown"></p>
   <br>
-  <p>Sorry for continuously extending, some subdomains are up, more are developing...</p>
+  <p>Available sites:</p>
   <p>
     <a href="https://mirror.columbina.dev" target="_blank">Mirror Station</a> |
     <a href="https://blog.columbina.dev" target="_blank">Blogs</a> |
@@ -28,10 +28,13 @@
     <span class="copy-link" onclick="copyText('mc.columbina.dev')">Copy address</span>, 
     <span class="copy-link" onclick="copyText('19132')">Copy port (for Bedrock)</span>
   </p>
-  
+  <br>
+  <p>
+    <a href="https://status.columbina.dev" target="_blank">Check Status</a>
+  </p>
   <script>
     // Countdown
-    var countDownDate = new Date("2025-01-29T00:00:00+08:00").getTime();
+    var countDownDate = new Date("2025-03-07T00:00:00+08:00").getTime();
     var countdownFunction = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
@@ -42,7 +45,7 @@
                                (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       document.getElementById("countdown").innerHTML = 
-        "Launching Countdown: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        "Homepage Launching Countdown: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (distance < 0) {
         clearInterval(countdownFunction);
         document.getElementById("countdown").innerHTML = "Launching Countdown: ?d ?h ?m ?s";
