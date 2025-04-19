@@ -8,6 +8,8 @@
     body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
     #countdown { font-size: 20px; margin-top: 30px; }
     .copy-link { cursor: pointer; text-decoration: underline; color: blue; }
+    ol { display: inline-block; padding-left: 0; margin: 0 auto; }
+	li { text-align: center; list-style-position: inside; }
   </style>
 </head>
 <body>
@@ -15,7 +17,14 @@
   <p>Placeholder for homepage... for now.</p>
   <p id="countdown"></p>
   <br>
-  <p>Available sites:</p>
+  <h3>Projects Currently Working On</h2>
+  <ol>
+  <li>Cross Platform Cultivation (修仙) Simulator Bot</li>
+  <li>Sticker (Messenger Apps) Converter With Web Interface</li>
+  <li>Web Timeline Similar to <a href="https://paimon.moe/timeline" target="_blank">paimon.moe</a></li>
+  </ol>  
+  <br><br>
+  <h2>Available sites:</h2>
   <p>
     <a href="https://mirror.columbina.dev" target="_blank">Mirror Station</a> |
     <a href="https://blog.columbina.dev" target="_blank">Blogs</a> |
@@ -35,7 +44,7 @@
   </p>
   <script>
     // Countdown
-    var countDownDate = new Date("2025-03-07T00:00:00+08:00").getTime();
+    var countDownDate = new Date("2025-11-20T10:00:00+08:00").getTime();
     var countdownFunction = setInterval(function() {
       var now = new Date().getTime();
       var distance = countDownDate - now;
