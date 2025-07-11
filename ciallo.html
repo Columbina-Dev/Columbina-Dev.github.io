@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
   <title>Ciallo～(∠・ω&lt; )⌒★</title>
+  <meta name="description" content="Ciallo～(∠・ω&lt; )⌒★">
+  <meta name="keywords" content="Ciallo～(∠・ω&lt; )⌒★">
   <link rel="icon" href="https://raw.columbina.dev/favicons/alist.png" type="image/png"/>
   <style>
     html, body {
@@ -46,12 +49,11 @@
   
   <script>
     window.addEventListener('load', () => {
-    const rnd = (min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+    const rnd       = (min,max)=>Math.floor(Math.random()*(max-min+1))+min;
     const randomColor = () => {
       const toHex = n=>('0'+n.toString(16)).slice(-2);
       return '#'+toHex(rnd(0,255))+toHex(rnd(0,255))+toHex(rnd(0,255));
     };
-
     function animate (el, props, duration, cb) {
       el.style.transition = `all ${duration}ms ease`;
       void el.offsetWidth;
@@ -64,18 +66,31 @@
       "https://raw.columbina.dev/ciallo/ciallo1.mp3",
       "https://raw.columbina.dev/ciallo/ciallo2.mp3",
       "https://raw.columbina.dev/ciallo/ciallo3.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo4.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo5.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo6.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo7.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo8.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo9.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo10.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo11.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo12.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo13.mp3",
     ];
+    const preloaded = audioClips.map(url => {
+      const a = new Audio(url);
+      a.preload = 'auto';
+      return a;
+    });
 
-    const clickLayer = document.getElementById('clickLayer');
     const clickTexts = ["Ciallo～(∠・ω< )⌒★","Ciallo～(∠・ω< )⌒☆"];
-    let idx = 0;
+    let txtIdx = 0;
 
-    clickLayer.addEventListener('click', e=>{
+    document.getElementById('clickLayer').addEventListener('click', e => {
       const span = document.createElement('span');
-      span.textContent = clickTexts[idx];
-      idx = (idx+1)%clickTexts.length;
-
-      Object.assign(span.style,{
+      span.textContent = clickTexts[txtIdx];
+      txtIdx = (txtIdx+1) % clickTexts.length;
+      Object.assign(span.style, {
         transform:'translateX(-50%)',
         position:'absolute',
         top:`${e.clientY-20}px`,
@@ -89,17 +104,11 @@
         pointerEvents:'none'
       });
       document.body.appendChild(span);
+      animate(span, { top:`${e.clientY-180}px`, opacity:'0' }, 1500, ()=>span.remove());
 
-      animate(span,
-        { top:`${e.clientY-180}px`, opacity:'0' },
-        1500,
-        ()=>span.remove()
-      );
-
-      const clip = audioClips[rnd(0, audioClips.length-1)];
-      const audio = new Audio(clip);
-      audio.volume = 1;
-      audio.play().catch(err=>console.error('[audio]', err));
+      const ai = rnd(0, preloaded.length-1);
+      const clone = preloaded[ai].cloneNode();
+      clone.play().catch(console.error);
     });
       
     const texts  = ["Ciallo～(∠・ω< )⌒★","Ciallo～(∠・ω< )⌒☆"];
