@@ -62,7 +62,8 @@
     const audioClips = [
       "https://raw.columbina.dev/ciallo/ciallo0.mp3",
       "https://raw.columbina.dev/ciallo/ciallo1.mp3",
-      "https://raw.columbina.dev/ciallo/ciallo2.mp3"
+      "https://raw.columbina.dev/ciallo/ciallo2.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo3.mp3",
     ];
 
     const clickLayer = document.getElementById('clickLayer');
@@ -75,6 +76,7 @@
       idx = (idx+1)%clickTexts.length;
 
       Object.assign(span.style,{
+        transform:'translateX(-50%)',
         position:'absolute',
         top:`${e.clientY-20}px`,
         left:`${e.clientX}px`,
