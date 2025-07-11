@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ciallo～(∠・ω&lt; )⌒★</title>
+  <link rel="icon" href="https://raw.columbina.dev/favicons/alist.png" type="image/png"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      user-select: none;
+    }
+    .center {
+      width: 540px;
+      height: 120px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    #clickLayer {
+      position: absolute;
+      top:   0;
+      left:  0;
+      width: 100%;
+      height:100%;
+      z-index: 10000;
+      background: transparent;
+    }
+    marquee {
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="main" class="center">
+    <img src="https://raw.columbina.dev/ciallo/ciallo.gif" alt="Ciallo"/>
+  </div>
+  <div id="clickLayer"></div>
+
+  
+  <script>
+    window.addEventListener('load', () => {
+    const rnd = (min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+    const randomColor = () => {
+      const toHex = n=>('0'+n.toString(16)).slice(-2);
+      return '#'+toHex(rnd(0,255))+toHex(rnd(0,255))+toHex(rnd(0,255));
+    };
+
+    function animate (el, props, duration, cb) {
+      el.style.transition = `all ${duration}ms ease`;
+      void el.offsetWidth;
+      Object.assign(el.style, props);
+      setTimeout(cb, duration);
+    }
+
+    const audioClips = [
+      "https://raw.columbina.dev/ciallo/ciallo0.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo1.mp3",
+      "https://raw.columbina.dev/ciallo/ciallo2.mp3"
+    ];
+
+    const clickLayer = document.getElementById('clickLayer');
+    const clickTexts = ["Ciallo～(∠・ω< )⌒★","Ciallo～(∠・ω< )⌒☆"];
+    let idx = 0;
+
+    clickLayer.addEventListener('click', e=>{
+      const span = document.createElement('span');
+      span.textContent = clickTexts[idx];
+      idx = (idx+1)%clickTexts.length;
+
+      Object.assign(span.style,{
+        position:'absolute',
+        top:`${e.clientY-20}px`,
+        left:`${e.clientX}px`,
+        zIndex:10001,
+        fontWeight:'bold',
+        fontSize:'20px',
+        whiteSpace:'nowrap',
+        color:randomColor(),
+        opacity:'1',
+        pointerEvents:'none'
+      });
+      document.body.appendChild(span);
+
+      animate(span,
+        { top:`${e.clientY-180}px`, opacity:'0' },
+        1500,
+        ()=>span.remove()
+      );
+
+      const clip = audioClips[rnd(0, audioClips.length-1)];
+      const audio = new Audio(clip);
+      audio.volume = 1;
+      audio.play().catch(err=>console.error('[audio]', err));
+    });
+      
+    const texts  = ["Ciallo～(∠・ω< )⌒★","Ciallo～(∠・ω< )⌒☆"];
+    const colors = ["red","aqua","coral","greenyellow","pink","orange","gray","mediumseagreen","violet"];
+    const fonts  = ["Arial","Verdana","Courier New","Georgia","Comic Sans MS","Impact","Lucida Console"];
+
+    const MAX       =  25;
+    const laneCount =  25;
+    const totalVH   =  85;
+    const laneSize  =  totalVH / laneCount;
+    let freeLanes = Array.from({length:laneCount}, (_,i)=> (i+0.5)*laneSize);
+    let active = 0;
+
+    function spawnMarquee(){
+      if(active >= MAX || freeLanes.length===0) return;
+      active++;
+      const li  = rnd(0, freeLanes.length-1);
+      const top = freeLanes.splice(li,1)[0];
+      const m = document.createElement("marquee");
+      m.behavior     = "scroll";
+      m.direction    = "left";
+      m.scrollAmount = rnd(17,30);
+      Object.assign(m.style, {
+        position:      "absolute",
+        top:           top + "vh",
+        whiteSpace:    "nowrap",
+        pointerEvents: "none",
+        color:         colors[rnd(0,colors.length-1)],
+        fontSize:      rnd(16,32) + "px",
+        fontFamily:    fonts[rnd(0,fonts.length-1)],
+        fontStyle:     Math.random()<0.5 ? "italic" : "normal",
+        fontWeight:    Math.random()<0.5 ? "bold"   : "normal",
+        letterSpacing: rnd(0,4) + "px",
+        textShadow:    `0 0 ${rnd(2,6)}px ${colors[rnd(0,colors.length-1)]}`
+      });
+      m.textContent = texts[rnd(0,texts.length-1)];
+      document.body.appendChild(m);
+      const checkExit = setInterval(() => {
+        if (m.getBoundingClientRect().right < 0) {
+          clearInterval(checkExit);
+          m.remove();
+          active--;
+          freeLanes.push(top);
+          setTimeout(spawnMarquee, rnd(0,2000));
+        }
+      }, 200);
+    }
+    for(let i=0; i<MAX; i++){setTimeout(spawnMarquee, rnd(0,5000));}
+    });
+  </script>
+</body>
+</html>
