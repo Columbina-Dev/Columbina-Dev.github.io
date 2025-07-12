@@ -18,14 +18,30 @@
       user-select: none;
     }
     .center {
-      width: 540px;
-      height: 120px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 54%;
+      max-width: 540px;
+      height: auto !important;
+      display: block;
       pointer-events: none;
     }
+
+    .center img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 480px) {
+      .center {
+        width: 90vw;
+        max-width: none;
+      }
+    }
+
     #clickLayer {
       position: absolute;
       top:   0;
